@@ -1,0 +1,60 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css ***!
+  \**************************************************************************************************************/
+@import url(https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.css);
+/*!******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css (1) ***!
+  \******************************************************************************************************************/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    background-color: lightgray;
+}
+
+
+/* From Uiverse.io by Galahhad */ 
+.checkbox {
+    display: none;
+  }
+  
+  .slider {
+    width: 60px;
+    height: 30px;
+    background-color: lightgray;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 4px solid transparent;
+    transition: .3s;
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.25) inset;
+    cursor: pointer;
+  }
+  
+  .slider::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transform: translateX(-30px);
+    border-radius: 20px;
+    transition: .3s;
+    box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.25);
+  }
+  
+  .checkbox:checked ~ .slider::before {
+    transform: translateX(30px);
+    box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.25);
+  }
+  
+  .checkbox:checked ~ .slider {
+    background-color: #2196F3;
+  }
+  
+  .checkbox:active ~ .slider::before {
+    transform: translate(0);
+  }
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzLmNzcyIsIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUEsY0FBYztBQUNkLG9CQUFvQjtBQUNwQixtQkFBbUI7QUFFbkI7SUFDSSwyQkFBMkI7QUFDL0I7OztBQUdBLGdDQUFnQztBQUNoQztJQUNJLGFBQWE7RUFDZjs7RUFFQTtJQUNFLFdBQVc7SUFDWCxZQUFZO0lBQ1osMkJBQTJCO0lBQzNCLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsYUFBYTtJQUNiLG1CQUFtQjtJQUNuQiw2QkFBNkI7SUFDN0IsZUFBZTtJQUNmLCtDQUErQztJQUMvQyxlQUFlO0VBQ2pCOztFQUVBO0lBQ0UsV0FBVztJQUNYLGNBQWM7SUFDZCxXQUFXO0lBQ1gsWUFBWTtJQUNaLHNCQUFzQjtJQUN0Qiw0QkFBNEI7SUFDNUIsbUJBQW1CO0lBQ25CLGVBQWU7SUFDZiwyQ0FBMkM7RUFDN0M7O0VBRUE7SUFDRSwyQkFBMkI7SUFDM0IsMkNBQTJDO0VBQzdDOztFQUVBO0lBQ0UseUJBQXlCO0VBQzNCOztFQUVBO0lBQ0UsdUJBQXVCO0VBQ3pCLEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hc3NldHMvc3R5bGVzL2FwcC5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQHRhaWx3aW5kIGJhc2U7XG5AdGFpbHdpbmQgY29tcG9uZW50cztcbkB0YWlsd2luZCB1dGlsaXRpZXM7XG5AaW1wb3J0ICdodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9mbG93Yml0ZS8yLjUuMi9mbG93Yml0ZS5taW4uY3NzJztcbmJvZHkge1xuICAgIGJhY2tncm91bmQtY29sb3I6IGxpZ2h0Z3JheTtcbn1cblxuXG4vKiBGcm9tIFVpdmVyc2UuaW8gYnkgR2FsYWhoYWQgKi8gXG4uY2hlY2tib3gge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbiAgXG4gIC5zbGlkZXIge1xuICAgIHdpZHRoOiA2MHB4O1xuICAgIGhlaWdodDogMzBweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBsaWdodGdyYXk7XG4gICAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBib3JkZXI6IDRweCBzb2xpZCB0cmFuc3BhcmVudDtcbiAgICB0cmFuc2l0aW9uOiAuM3M7XG4gICAgYm94LXNoYWRvdzogMCAwIDEwcHggMCByZ2IoMCwgMCwgMCwgMC4yNSkgaW5zZXQ7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICB9XG4gIFxuICAuc2xpZGVyOjpiZWZvcmUge1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtMzBweCk7XG4gICAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgICB0cmFuc2l0aW9uOiAuM3M7XG4gICAgYm94LXNoYWRvdzogMCAwIDEwcHggM3B4IHJnYigwLCAwLCAwLCAwLjI1KTtcbiAgfVxuICBcbiAgLmNoZWNrYm94OmNoZWNrZWQgfiAuc2xpZGVyOjpiZWZvcmUge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgzMHB4KTtcbiAgICBib3gtc2hhZG93OiAwIDAgMTBweCAzcHggcmdiKDAsIDAsIDAsIDAuMjUpO1xuICB9XG4gIFxuICAuY2hlY2tib3g6Y2hlY2tlZCB+IC5zbGlkZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMyMTk2RjM7XG4gIH1cbiAgXG4gIC5jaGVja2JveDphY3RpdmUgfiAuc2xpZGVyOjpiZWZvcmUge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKDApO1xuICB9Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/

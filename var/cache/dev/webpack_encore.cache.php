@@ -13,11 +13,31 @@ return [[
         'app' => [
             'js' => [
                 '/build/runtime.js',
-                '/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_flowbite_lib_esm_index_js.js',
+                '/build/vendors-node_modules_flowbite_lib_esm_index_js-node_modules_core-js_modules_es_date_to-primit-b229d2.js',
                 '/build/app.js',
             ],
             'css' => [
+                '/build/vendors-node_modules_flowbite_dist_flowbite_min_css.css',
                 '/build/app.css',
+            ],
+        ],
+        'styles' => [
+            'js' => [
+                '/build/runtime.js',
+            ],
+            'css' => [
+                '/build/vendors-node_modules_flowbite_dist_flowbite_min_css.css',
+                '/build/styles.css',
+            ],
+        ],
+        'scripJs' => [
+            'js' => [
+                '/build/runtime.js',
+                '/build/vendors-node_modules_flowbite_lib_esm_index_js-node_modules_core-js_modules_es_date_to-primit-b229d2.js',
+            ],
+            'css' => [
+                '/build/vendors-node_modules_flowbite_dist_flowbite_min_css.css',
+                '/build/scripJs.css',
             ],
         ],
     ],
