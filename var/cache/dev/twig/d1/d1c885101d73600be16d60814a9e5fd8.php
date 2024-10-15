@@ -78,7 +78,7 @@ class __TwigTemplate_6ab95c603d79495b90b1210a896fbea3 extends Template
     <form
       action=\"";
         // line 6
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.searchByTelephone");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.index");
         yield "\"
       class=\"w-fit border-collapse flex flex-row align-middle justify-center\"
     >
@@ -107,7 +107,7 @@ class __TwigTemplate_6ab95c603d79495b90b1210a896fbea3 extends Template
         <input
           type=\"text\"
           id=\"table-search\"
-          name=\"recherche\"
+          name=\"telephone\"
           class=\"block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500\"
           placeholder=\"Search an user by username/phone\"
         />
@@ -369,7 +369,7 @@ class __TwigTemplate_6ab95c603d79495b90b1210a896fbea3 extends Template
 <div class=\"margin-auto mt-10 p-5\">
   <div class=\"flex flex-row justify-between px-5 mb-5\">
     <form
-      action=\"{{ path('client.searchByTelephone') }}\"
+      action=\"{{ path('client.index') }}\"
       class=\"w-fit border-collapse flex flex-row align-middle justify-center\"
     >
       <div class=\"relative\">
@@ -397,7 +397,7 @@ class __TwigTemplate_6ab95c603d79495b90b1210a896fbea3 extends Template
         <input
           type=\"text\"
           id=\"table-search\"
-          name=\"recherche\"
+          name=\"telephone\"
           class=\"block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500\"
           placeholder=\"Search an user by username/phone\"
         />

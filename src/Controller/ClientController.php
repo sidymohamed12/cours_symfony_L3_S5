@@ -20,7 +20,7 @@ use function PHPUnit\Framework\isNull;
 class ClientController extends AbstractController
 {
     #[Route('/client', name: 'client.index', methods: ['GET', 'POST'])]
-    public function index(ClientRepository $clientRepository, Request $request): Response
+    public function index(Request $request, ClientRepository $clientRepository): Response
     {
 
         $formSearch = $this->createForm(SearchClientType::class);
@@ -31,7 +31,7 @@ class ClientController extends AbstractController
 
         $totalClients = $clientRepository->count([]);
         $totalPages = ceil($totalClients / $limit);
-        // $formSearch->get('telephone')-getData()
+
         if ($formSearch->isSubmitted($request) && $formSearch->isValid()) {
             $clients = $clientRepository->paginateClient($page, $limit, $formSearch->get('telephone')->getData());
             $page = 1;
@@ -61,40 +61,20 @@ class ClientController extends AbstractController
     #[Route('/client/search', name: 'client.searchByTelephone', methods: ['GET', 'POST'])]
     public function searchByTelephone(Request $request, ClientRepository $clientRepository): Response
     {
-        $recherche = $request->query->get('recherche');
+        $telephone = $request->query->get('telephone');
 
         $page = $request->query->getInt('page', 1);
         $limit = 2;
 
-        if ($recherche && $recherche !== '') {
-            $queryBuilder = $clientRepository->createQueryBuilder('c')
-                ->where('c.surnom LIKE :search')
-                ->orWhere('c.telephone LIKE :search')
-                ->setParameter('search', '%' . $recherche . '%');
+        if ($telephone && $telephone !== '') {
 
-            // Pagination
-            $clients = $queryBuilder
-                ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit)
-                ->getQuery()
-                ->getResult();
+            $clients = $clientRepository->paginateClient($page, $limit, $telephone);
 
-            // Nombre total de résultats trouvés pour la recherche
-            $totalClients = count($queryBuilder->getQuery()->getResult());
+            $totalClients = $clientRepository->count([]);
             $totalPages = ceil($totalClients / $limit);
 
-            // Générer les DTO pour chaque client
-            $clientDTOs = array_map(function (Client $client) {
-                return new ClientDTO(
-                    $client->getTelephone(),
-                    $client->getAdresse(),
-                    $client->getSurnom(),
-                    $client->getUsers()
-                );
-            }, $clients);
-
             return $this->render('client/index.html.twig', [
-                'clients' => $clientDTOs,
+                'clients' => $clients,
                 'currentPage' => $page,
                 'totalPages' => $totalPages,
             ]);
