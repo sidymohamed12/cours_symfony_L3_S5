@@ -431,7 +431,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.fy3i8yh"/>
+      <argument type="service" id=".service_locator.wGbNoR3"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3375,7 +3375,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.fy3i8yh"/>
+      <argument type="service" id=".service_locator.wGbNoR3"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7747,6 +7747,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator..XbHHm9" method="withContext"/>
     </service>
+    <service id=".service_locator..XbHHm9.App\Controller\ClientController::searchByTelephone()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ClientController::searchByTelephone()"/>
+      <argument>App\Controller\ClientController::searchByTelephone()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator..XbHHm9" method="withContext"/>
+    </service>
     <service id=".service_locator.P.blNFL" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7771,7 +7777,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.OgKtQNk" method="withContext"/>
     </service>
-    <service id=".service_locator.fy3i8yh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wGbNoR3" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -7779,11 +7785,13 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Controller\ClientController::index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
+        <argument key="App\Controller\ClientController::searchByTelephone" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::searchByTelephone()"/>
         <argument key="App\Controller\ClientController::create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\UsersController::index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Controller\ClientController:index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
+        <argument key="App\Controller\ClientController:searchByTelephone" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::searchByTelephone()"/>
         <argument key="App\Controller\ClientController:create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\UsersController:index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
       </argument>
@@ -9906,7 +9914,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.fy3i8yh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.wGbNoR3"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>

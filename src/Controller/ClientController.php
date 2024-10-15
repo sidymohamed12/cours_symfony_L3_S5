@@ -31,7 +31,7 @@ class ClientController extends AbstractController
 
         $totalClients = $clientRepository->count([]);
         $totalPages = ceil($totalClients / $limit);
-
+        // $formSearch->get('telephone')-getData()
         if ($formSearch->isSubmitted($request) && $formSearch->isValid()) {
             $clients = $clientRepository->paginateClient($page, $limit, $formSearch->get('telephone')->getData());
             $page = 1;
@@ -55,6 +55,55 @@ class ClientController extends AbstractController
     {
         return $this->render('client/index.html.twig', [
             'controller_name' => 'ClientController',
+        ]);
+    }
+
+    #[Route('/client/search', name: 'client.searchByTelephone', methods: ['GET', 'POST'])]
+    public function searchByTelephone(Request $request, ClientRepository $clientRepository): Response
+    {
+        $recherche = $request->query->get('recherche');
+
+        $page = $request->query->getInt('page', 1);
+        $limit = 2;
+
+        if ($recherche && $recherche !== '') {
+            $queryBuilder = $clientRepository->createQueryBuilder('c')
+                ->where('c.surnom LIKE :search')
+                ->orWhere('c.telephone LIKE :search')
+                ->setParameter('search', '%' . $recherche . '%');
+
+            // Pagination
+            $clients = $queryBuilder
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult();
+
+            // Nombre total de résultats trouvés pour la recherche
+            $totalClients = count($queryBuilder->getQuery()->getResult());
+            $totalPages = ceil($totalClients / $limit);
+
+            // Générer les DTO pour chaque client
+            $clientDTOs = array_map(function (Client $client) {
+                return new ClientDTO(
+                    $client->getTelephone(),
+                    $client->getAdresse(),
+                    $client->getSurnom(),
+                    $client->getUsers()
+                );
+            }, $clients);
+
+            return $this->render('client/index.html.twig', [
+                'clients' => $clientDTOs,
+                'currentPage' => $page,
+                'totalPages' => $totalPages,
+            ]);
+        }
+
+        return $this->render('client/index.html.twig', [
+            'clients' => [],
+            'currentPage' => $page,
+            'totalPages' => 1,
         ]);
     }
 
