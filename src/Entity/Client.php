@@ -6,12 +6,11 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[UniqueEntity('telephone', message: 'le téléphone doit être unique')]
-#[UniqueEntity('surname', message: 'le surname doit être unique')]
+// #[UniqueEntity('telephone', message: 'le téléphone doit être unique')]
+// #[UniqueEntity('surname', message: 'le surname doit être unique')]
 class Client
 {
     #[ORM\Id]
@@ -20,6 +19,13 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 10, unique: true)]
+    #[Assert\NotBlank(
+        message: 'renseigné un telephone valide'
+    )]
+    #[Assert\Regex(
+        pattern: '/^(77|76|70|78)([0-9]{7})$/',
+        message: 'le téléphone doit commencer par 77, 76, 70 ou 78 et contenir 7 chiffres'
+    )]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
@@ -43,11 +49,14 @@ class Client
     /**
      * @var Collection<int, Dette>
      */
-    #[ORM\OneToMany(targetEntity: Dette::class, mappedBy: 'client', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Dette::class, mappedBy: 'client', orphanRemoval: true, cascade: ['persist'])]
     private Collection $dettes;
 
     public function __construct()
     {
+
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
         $this->dettes = new ArrayCollection();
     }
 

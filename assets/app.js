@@ -18,27 +18,16 @@ console.log("app.js est chargé");
 const toggleSwitch = document.getElementById("toggleSwitch");
 const formUser = document.getElementById("userSwitch");
 formUser.style.display = "none";
-const inputs = userSwitch.querySelectorAll("input");
 
 toggleSwitch.addEventListener("change", function () {
   if (this.checked) {
-    // console.log("Le switch est activé");
     formUser.style.display = "block";
-    inputs.forEach((input) => {
-      input.required = this.checked;
-    });
   } else {
-    // console.log("Le switch est désactivé");
     formUser.style.display = "none";
-    inputs.forEach((input) => {
-      input.required = this.checked;
-    });
   }
 });
 
 function isEmpty(input) {
-  //inputs est un tableau
-  //recuperer le parent de l'element:
   if (input.value.trim() === "") {
     return true;
   } else {

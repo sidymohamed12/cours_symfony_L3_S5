@@ -20,7 +20,7 @@ class SearchClientType extends AbstractType
                 'attr' => [
                     'class' => 'block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500',
                     'placeholder' => 'Search an user by phone',
-
+                    'name' => 'telephone',
                 ],
                 'constraints' => [
                     new NotBlank(),
@@ -30,7 +30,7 @@ class SearchClientType extends AbstractType
 
             ->add('search', SubmitType::class, [
                 'attr' => [
-                    'class' => 'text-white ml-3 bg-blue-700 font-medium rounded-lg text-sm px-6 py-1 text-center mb-1',
+                    'class' => 'text-white ml-3 bg-gradient-to-br from-green-400 to-blue-600 font-medium rounded-lg text-sm px-6 py-1 text-center mb-1 ',
                 ]
             ])
 

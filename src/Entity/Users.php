@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-class Users
+#[UniqueEntity('login', message: 'le login doit être unique')]
+class Users implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,19 +27,40 @@ class Users
     private ?bool $isBlocked = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'renseigné un prenom valide'
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'renseigné un nom valide'
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'renseigné un login valide'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+        message: 'ex : nom@example.com'
+    )]
     private ?string $login = null;
 
     #[ORM\Column(length: 60)]
+
     private ?string $password = null;
 
     #[ORM\OneToOne(mappedBy: 'users', cascade: ['persist', 'remove'])]
     private ?Client $client = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->isBlocked = false;
+    }
 
     public function getId(): ?int
     {

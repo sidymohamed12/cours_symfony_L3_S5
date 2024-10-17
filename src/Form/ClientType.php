@@ -3,14 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Client;
-use App\Entity\Users;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+
 
 class ClientType extends AbstractType
 {
@@ -18,6 +21,7 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('telephone', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'mt-2 block w-1/4 px-4 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm',
                     'placeholder' => 'Téléphone',
@@ -25,6 +29,7 @@ class ClientType extends AbstractType
                 'label' => 'Téléphone',
             ])
             ->add('adresse', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'mt-2 block w-1/4 px-4 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm',
                     'placeholder' => 'adresse',
@@ -32,6 +37,7 @@ class ClientType extends AbstractType
                 'label' => 'adresse',
             ])
             ->add('surnom', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'mt-2 block w-1/4 px-4 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm',
                     'placeholder' => 'surnom',

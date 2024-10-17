@@ -22,7 +22,7 @@ class Dette
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    
+
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -30,6 +30,11 @@ class Dette
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
     public function getId(): ?int
     {
         return $this->id;

@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.css";
-body {
-  background-color: lightgray;
-}
 
-/* From Uiverse.io by Galahhad */
 .checkbox {
   display: none;
 }

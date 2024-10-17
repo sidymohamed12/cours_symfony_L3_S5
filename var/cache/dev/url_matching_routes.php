@@ -16,7 +16,6 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/article' => [[['_route' => 'article.index', '_controller' => 'App\\Controller\\ArticleController::index'], null, null, null, false, false, null]],
         '/client' => [[['_route' => 'client.index', '_controller' => 'App\\Controller\\ClientController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/client/search' => [[['_route' => 'client.searchByTelephone', '_controller' => 'App\\Controller\\ClientController::searchByTelephone'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/client/create' => [[['_route' => 'client.create', '_controller' => 'App\\Controller\\ClientController::create'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/dette' => [[['_route' => 'dette.index', '_controller' => 'App\\Controller\\DetteController::index'], null, null, null, false, false, null]],
         '/users' => [[['_route' => 'users.index', '_controller' => 'App\\Controller\\UsersController::index'], null, null, null, false, false, null]],
@@ -26,36 +25,42 @@ return [
         0 => '{^(?'
                 .'|/_(?'
                     .'|error/(\\d+)(?:\\.([^/]++))?(*:38)'
-                    .'|wdt/([^/]++)(*:57)'
+                    .'|components/([^/]++)(?:/([^/]++))?(*:78)'
+                    .'|wdt/([^/]++)(*:97)'
                     .'|profiler/(?'
-                        .'|font/([^/\\.]++)\\.woff2(*:98)'
+                        .'|font/([^/\\.]++)\\.woff2(*:138)'
                         .'|([^/]++)(?'
                             .'|/(?'
-                                .'|search/results(*:134)'
-                                .'|router(*:148)'
+                                .'|search/results(*:175)'
+                                .'|router(*:189)'
                                 .'|exception(?'
-                                    .'|(*:168)'
-                                    .'|\\.css(*:181)'
+                                    .'|(*:209)'
+                                    .'|\\.css(*:222)'
                                 .')'
                             .')'
-                            .'|(*:191)'
+                            .'|(*:232)'
                         .')'
                     .')'
                 .')'
-                .'|/client/show(?:/([^/]++))?(*:228)'
+                .'|/client/show(?'
+                    .'|(?:/([^/]++))?(*:272)'
+                    .'|(?:/([^/]++)(?:/([^/]++))?)?(*:308)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         38 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        57 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        98 => [[['_route' => '_profiler_font', '_controller' => 'web_profiler.controller.profiler::fontAction'], ['fontName'], null, null, false, false, null]],
-        134 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        148 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        228 => [
-            [['_route' => 'client.show', 'id' => null, '_controller' => 'App\\Controller\\ClientController::show'], ['id'], ['GET' => 0], null, false, true, null],
+        78 => [[['_route' => 'ux_live_component', '_live_action' => 'get'], ['_live_component', '_live_action'], null, null, false, true, null]],
+        97 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        138 => [[['_route' => '_profiler_font', '_controller' => 'web_profiler.controller.profiler::fontAction'], ['fontName'], null, null, false, false, null]],
+        175 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        189 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        209 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        222 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        232 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        272 => [[['_route' => 'client.show', 'id' => null, '_controller' => 'App\\Controller\\ClientController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        308 => [
+            [['_route' => 'client.showDette', 'id' => null, 'etat' => null, '_controller' => 'App\\Controller\\ClientController::showByEtat'], ['id', 'etat'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
