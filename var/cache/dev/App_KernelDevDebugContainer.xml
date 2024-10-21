@@ -403,7 +403,11 @@
     <service id="App\DTO\ClientDTO" class="App\DTO\ClientDTO" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\DTO\ClientDTO&quot;: argument &quot;$telephone&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
+    <service id="App\DTO\ClientSearchDTO" class="App\DTO\ClientSearchDTO" autowire="true" autoconfigure="true"/>
     <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+    </service>
+    <service id="App\DataFixtures\ArticleFixtures" class="App\DataFixtures\ArticleFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
     <service id="App\DataFixtures\ClientFixtures" class="App\DataFixtures\ClientFixtures" autowire="true" autoconfigure="true">
@@ -413,7 +417,13 @@
     <service id="App\DataFixtures\DetteFixtures" class="App\DataFixtures\DetteFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
+    <service id="App\Enum\StatutDette" class="App\Enum\StatutDette" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="The autoloader expected class &quot;App\Enum\StatutDette&quot; to be defined in file &quot;/home/sms_12/gestion_dette/vendor/composer/../../src/Enum/StatutDette.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
+    </service>
     <service id="App\Form\ClientType" class="App\Form\ClientType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\DetteType" class="App\Form\DetteType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\SearchClientType" class="App\Form\SearchClientType" autowire="true" autoconfigure="true">
@@ -425,7 +435,15 @@
     <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\DetailRepository" class="App\Repository\DetailRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -464,7 +482,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.bHK4SdQ"/>
+      <argument type="service" id=".service_locator.DRQgkQc"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1400,6 +1418,7 @@
       </argument>
       <argument type="collection">
         <argument>App\Form\ClientType</argument>
+        <argument>App\Form\DetteType</argument>
         <argument>App\Form\SearchClientType</argument>
         <argument>App\Form\SearchUserType</argument>
         <argument>App\Form\UserType</argument>
@@ -3534,7 +3553,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.bHK4SdQ"/>
+      <argument type="service" id=".service_locator.DRQgkQc"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4044,7 +4063,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.fRNadce"/>
+      <argument type="service" id=".service_locator.imulqfZ"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5582,7 +5601,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.CSPPFt."/>
+      <argument type="service" id=".service_locator.baWHIlu"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -7390,6 +7409,10 @@
             <argument key="groups" type="collection"/>
           </argument>
           <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\ArticleFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
             <argument key="fixture" type="service" id="App\DataFixtures\ClientFixtures"/>
             <argument key="groups" type="collection"/>
           </argument>
@@ -7594,20 +7617,28 @@
     <service id=".abstract.instanceof.App\Controller\UsersController" class="App\Controller\UsersController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ArticleFixtures" class="App\DataFixtures\ArticleFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\ArticleFixtures" class="App\DataFixtures\ArticleFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ClientFixtures" class="App\DataFixtures\ClientFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\ClientFixtures" class="App\DataFixtures\ClientFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\DetteFixtures" class="App\DataFixtures\DetteFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\DetteFixtures" class="App\DataFixtures\DetteFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ClientType" class="App\Form\ClientType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ClientType" class="App\Form\ClientType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DetteType" class="App\Form\DetteType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\DetteType" class="App\Form\DetteType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchClientType" class="App\Form\SearchClientType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SearchClientType" class="App\Form\SearchClientType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SearchUserType" class="App\Form\SearchUserType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SearchUserType" class="App\Form\SearchUserType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ClientRepository" class="App\Repository\ClientRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DetailRepository" class="App\Repository\DetailRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\DetailRepository" class="App\Repository\DetailRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\DetteRepository" class="App\Repository\DetteRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\DetteRepository" class="App\Repository\DetteRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UsersRepository" class="App\Repository\UsersRepository" autowire="true" abstract="true"/>
@@ -8136,6 +8167,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.4wc4Ag1" method="withContext"/>
     </service>
+    <service id=".service_locator.IqSceiR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.IqSceiR.App\Controller\ArticleController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ArticleController::index()"/>
+      <argument>App\Controller\ArticleController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.IqSceiR" method="withContext"/>
+    </service>
     <service id=".service_locator..XbHHm9" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8179,6 +8222,32 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.bSaFovV" method="withContext"/>
     </service>
+    <service id=".service_locator.AjxBq8." class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="detteRepository" type="service_closure" id="App\Repository\DetteRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.AjxBq8..App\Controller\DetteController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DetteController::index()"/>
+      <argument>App\Controller\DetteController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.AjxBq8." method="withContext"/>
+    </service>
+    <service id=".service_locator.xlXqlQY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="clientRepository" type="service_closure" id="App\Repository\ClientRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xlXqlQY.App\Controller\DetteController::create()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DetteController::create()"/>
+      <argument>App\Controller\DetteController::create()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xlXqlQY" method="withContext"/>
+    </service>
     <service id=".service_locator.OgKtQNk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8197,25 +8266,31 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.P.blNFL" method="withContext"/>
     </service>
-    <service id=".service_locator.bHK4SdQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.DRQgkQc" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
+        <argument key="App\Controller\ArticleController::index" type="service_closure" id=".service_locator.IqSceiR.App\Controller\ArticleController::index()"/>
         <argument key="App\Controller\ClientController::index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
         <argument key="App\Controller\ClientController::create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\ClientController::show" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::show()"/>
         <argument key="App\Controller\ClientController::showByEtat" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::showByEtat()"/>
+        <argument key="App\Controller\DetteController::index" type="service_closure" id=".service_locator.AjxBq8..App\Controller\DetteController::index()"/>
+        <argument key="App\Controller\DetteController::create" type="service_closure" id=".service_locator.xlXqlQY.App\Controller\DetteController::create()"/>
         <argument key="App\Controller\UsersController::index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
         <argument key="App\Controller\UsersController::create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\UsersController::create()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
+        <argument key="App\Controller\ArticleController:index" type="service_closure" id=".service_locator.IqSceiR.App\Controller\ArticleController::index()"/>
         <argument key="App\Controller\ClientController:index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
         <argument key="App\Controller\ClientController:create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\ClientController:show" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::show()"/>
         <argument key="App\Controller\ClientController:showByEtat" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::showByEtat()"/>
+        <argument key="App\Controller\DetteController:index" type="service_closure" id=".service_locator.AjxBq8..App\Controller\DetteController::index()"/>
+        <argument key="App\Controller\DetteController:create" type="service_closure" id=".service_locator.xlXqlQY.App\Controller\DetteController::create()"/>
         <argument key="App\Controller\UsersController:index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
         <argument key="App\Controller\UsersController:create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\UsersController::create()"/>
       </argument>
@@ -8377,10 +8452,11 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.fRNadce" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.imulqfZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ClientType" type="service_closure" id="App\Form\ClientType"/>
+        <argument key="App\Form\DetteType" type="service_closure" id="App\Form\DetteType"/>
         <argument key="App\Form\SearchClientType" type="service_closure" id="App\Form\SearchClientType"/>
         <argument key="App\Form\SearchUserType" type="service_closure" id="App\Form\SearchUserType"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
@@ -8509,10 +8585,12 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.CSPPFt." class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.baWHIlu" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ArticleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
         <argument key="App\Repository\ClientRepository" type="service_closure" id="App\Repository\ClientRepository"/>
+        <argument key="App\Repository\DetailRepository" type="service_closure" id="App\Repository\DetailRepository"/>
         <argument key="App\Repository\DetteRepository" type="service_closure" id="App\Repository\DetteRepository"/>
         <argument key="App\Repository\UsersRepository" type="service_closure" id="App\Repository\UsersRepository"/>
       </argument>
@@ -10435,7 +10513,7 @@
     <service id="Symfony\UX\LiveComponent\ComponentValidatorInterface" alias="Symfony\UX\LiveComponent\ComponentValidator"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.bHK4SdQ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.DRQgkQc"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10479,9 +10557,12 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.diNoEIK" alias=".service_locator.4wc4Ag1"/>
+    <service id=".service_locator.X_OvSFQ" alias=".service_locator.IqSceiR"/>
     <service id=".service_locator.gJzZ9zV" alias=".service_locator..XbHHm9"/>
     <service id=".service_locator.4KsIGyf" alias=".service_locator.P.blNFL"/>
     <service id=".service_locator.GUAfjEv" alias=".service_locator.bSaFovV"/>
+    <service id=".service_locator.MvptH6B" alias=".service_locator.AjxBq8."/>
+    <service id=".service_locator.TZDmtOG" alias=".service_locator.xlXqlQY"/>
     <service id=".service_locator.IZhOe_k" alias=".service_locator.OgKtQNk"/>
     <service id=".service_locator.b491maD" alias=".service_locator.QaaoWjx"/>
   </services>

@@ -23,14 +23,14 @@ class ClientFixtures extends Fixture
 
         for ($i = 0; $i < 10; $i++) {
             $client = new Client();
-            $client->setTelephone('771234567', $i);
-            $client->setSurnom('surnom', $i);
-            $client->setAdresse('adresse', $i);
+            $client->setTelephone('77123456' . $i);
+            $client->setSurnom('surnom' . $i);
+            $client->setAdresse('adresse' . $i);
             if ($i % 2 == 0) {
                 $user = new Users();
-                $user->setNom("nom", $i);
-                $user->setPrenom("Prenom", $i);
-                $user->setLogin("login", $i);
+                $user->setNom("nom" . $i);
+                $user->setPrenom("Prenom" . $i);
+                $user->setLogin("login" . $i);
                 $plaintextPassword = "password";
 
                 // hash the password (based on the security.yaml config for the $user class)

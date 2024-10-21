@@ -17,7 +17,7 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function paginateClient(int $page, int $limit): Paginator
+    public function paginateArticle(int $page, int $limit): Paginator
     {
 
         $query = $this->createQueryBuilder('c')

@@ -19,6 +19,14 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+            - '../src/Migrations.php'
+            - '../src/Tests.php'
 
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    App\Enum\:
+        resource: '../src/Enum'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

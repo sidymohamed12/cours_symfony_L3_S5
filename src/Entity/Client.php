@@ -6,11 +6,12 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-// #[UniqueEntity('telephone', message: 'le téléphone doit être unique')]
-// #[UniqueEntity('surname', message: 'le surname doit être unique')]
+#[UniqueEntity('telephone', message: 'le téléphone doit être unique')]
+#[UniqueEntity('surname', message: 'le surname doit être unique')]
 class Client
 {
     #[ORM\Id]

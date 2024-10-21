@@ -204,9 +204,111 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
         yield "      </tbody>
     </table>
     <!-- Pagination -->
-    ";
-        // line 163
-        yield "  </div>
+    <nav
+      aria-label=\"Page navigation example\"
+      class=\"mt-3 flex justify-end mb-5\"
+    >
+      <ul class=\"flex items-center -space-x-px h-8 text-sm\">
+        ";
+        // line 103
+        if (((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 103, $this->source); })()) > 1)) {
+            // line 104
+            yield "        <li>
+          <a
+            href=\"";
+            // line 106
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users.index", ["page" => ((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 106, $this->source); })()) - 1)]), "html", null, true);
+            yield "\"
+            class=\"flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700\"
+          >
+            <span class=\"sr-only\">Previous</span>
+            <svg
+              class=\"w-2.5 h-2.5 rtl:rotate-180\"
+              aria-hidden=\"true\"
+              xmlns=\"http://www.w3.org/2000/svg\"
+              fill=\"none\"
+              viewBox=\"0 0 6 10\"
+            >
+              <path
+                stroke=\"currentColor\"
+                stroke-linecap=\"round\"
+                stroke-linejoin=\"round\"
+                stroke-width=\"2\"
+                d=\"M5 1 1 5l4 4\"
+              />
+            </svg>
+          </a>
+        </li>
+        ";
+        }
+        // line 127
+        yield " ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(range(1, (isset($context["totalPages"]) || array_key_exists("totalPages", $context) ? $context["totalPages"] : (function () { throw new RuntimeError('Variable "totalPages" does not exist.', 127, $this->source); })())));
+        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+            // line 128
+            yield "        <li>
+          <a
+            href=\"";
+            // line 130
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users.index", ["page" => $context["i"]]), "html", null, true);
+            yield "\"
+            class=\"flex items-center justify-center px-3 h-8 leading-tight border ";
+            // line 131
+            if (($context["i"] == (isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 131, $this->source); })()))) {
+                yield " z-10 text-blue-500 border-blue-300 bg-blue-100 hover:bg-blue-200 hover:text-blue-300 ";
+            } else {
+                yield "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 ";
+            }
+            yield "\"
+          >
+            ";
+            // line 133
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["i"], "html", null, true);
+            yield "
+          </a>
+        </li>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 136
+        yield " ";
+        if (((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 136, $this->source); })()) < (isset($context["totalPages"]) || array_key_exists("totalPages", $context) ? $context["totalPages"] : (function () { throw new RuntimeError('Variable "totalPages" does not exist.', 136, $this->source); })()))) {
+            // line 137
+            yield "        <li>
+          <a
+            href=\"";
+            // line 139
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users.index", ["page" => ((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 139, $this->source); })()) + 1)]), "html", null, true);
+            yield "\"
+            class=\"flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700\"
+          >
+            <span class=\"sr-only\">Next</span>
+            <svg
+              class=\"w-2.5 h-2.5 rtl:rotate-180\"
+              aria-hidden=\"true\"
+              xmlns=\"http://www.w3.org/2000/svg\"
+              fill=\"none\"
+              viewBox=\"0 0 6 10\"
+            >
+              <path
+                stroke=\"currentColor\"
+                stroke-linecap=\"round\"
+                stroke-linejoin=\"round\"
+                stroke-width=\"2\"
+                d=\"m1 9 4-4-4-4\"
+              />
+            </svg>
+          </a>
+        </li>
+        ";
+        }
+        // line 161
+        yield "      </ul>
+    </nav>
+  </div>
 </div> ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -238,7 +340,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  209 => 163,  204 => 95,  189 => 86,  183 => 83,  177 => 80,  173 => 78,  169 => 77,  166 => 76,  160 => 72,  158 => 71,  138 => 53,  128 => 45,  122 => 42,  118 => 41,  113 => 39,  88 => 16,  86 => 10,  85 => 9,  80 => 7,  77 => 6,  63 => 4,  40 => 1,);
+        return array (  309 => 161,  284 => 139,  280 => 137,  277 => 136,  267 => 133,  258 => 131,  254 => 130,  250 => 128,  245 => 127,  220 => 106,  216 => 104,  214 => 103,  204 => 95,  189 => 86,  183 => 83,  177 => 80,  173 => 78,  169 => 77,  166 => 76,  160 => 72,  158 => 71,  138 => 53,  128 => 45,  122 => 42,  118 => 41,  113 => 39,  88 => 16,  86 => 10,  85 => 9,  80 => 7,  77 => 6,  63 => 4,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -340,7 +442,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
       </tbody>
     </table>
     <!-- Pagination -->
-    {# <nav
+    <nav
       aria-label=\"Page navigation example\"
       class=\"mt-3 flex justify-end mb-5\"
     >
@@ -348,7 +450,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
         {% if currentPage > 1 %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: currentPage - 1 }) }}\"
+            href=\"{{ path('users.index', { page: currentPage - 1 }) }}\"
             class=\"flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700\"
           >
             <span class=\"sr-only\">Previous</span>
@@ -372,7 +474,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
         {% endif %} {% for i in 1..totalPages %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: i }) }}\"
+            href=\"{{ path('users.index', { page: i }) }}\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight border {% if i == currentPage %} z-10 text-blue-500 border-blue-300 bg-blue-100 hover:bg-blue-200 hover:text-blue-300 {% else %}text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 {% endif %}\"
           >
             {{ i }}
@@ -381,7 +483,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
         {% endfor %} {% if currentPage < totalPages %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: currentPage + 1 }) }}\"
+            href=\"{{ path('users.index', { page: currentPage + 1 }) }}\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700\"
           >
             <span class=\"sr-only\">Next</span>
@@ -404,7 +506,7 @@ class __TwigTemplate_7df7865841c06dd086bcd61e784db984 extends Template
         </li>
         {% endif %}
       </ul>
-    </nav> #}
+    </nav>
   </div>
 </div> {% endblock %}
 

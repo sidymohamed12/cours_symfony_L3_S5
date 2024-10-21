@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %} {% block main %}
+
+<div
+  class="bg-gradient-to-br from-green-400 to-blue-600 px-6 py-5 mx-auto mt-14 my-5 box-shadow3"
+  style="width: 60%"
+>
+  <h1 class="text-center text-3xl mb-8 font-semibold underline">
+    Nouvelle Ajout de Dette
+  </h1>
+  <form action="{{ path('dette.create') }}" method="post">
+    <!-- Client -->
+    <div>
+      <label for="client" class="block mb-2 text-sm font-medium text-slate-800"
+        >Client</label
+      >
+      <select
+        name="client"
+        class="bg-gray-50 border border-slate-800 text-sm font-medium rounded-lg w-full p-2.5"
+      >
+        <option selected>...</option>
+        {% for client in clients %}
+        <option value="{{ client.id }}">{{ client.surnom }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- DIV INLINE pour Article et Quantité -->
+    <div class="flex flex-row mt-5 justify-between items-center m-auto mb-4">
+      <!-- Article -->
+      <div>
+        <label
+          for="article"
+          class="block mb-2 text-sm font-medium text-slate-800"
+          >Article</label
+        >
+        <select
+          name="article"
+          class="bg-gray-50 border border-slate-800 text-slate-800 text-sm font-medium rounded-lg w-full p-2.5"
+        >
+          <option selected>...</option>
+          {% for article in articles %}
+          <option value="{{ article.id }}">{{ article.libelle }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Quantité prise -->
+      <div>
+        <label
+          for="quantity"
+          class="block mb-2 text-sm font-medium text-slate-800"
+          >Quantité prise</label
+        >
+        <input
+          type="number"
+          name="quantity"
+          class="bg-gray-50 border w-full border-gray-300 text-slate-800 text-sm rounded-lg block p-2.5"
+        />
+      </div>
+
+      <button
+        name="addArticle"
+        type="submit"
+        class="bg-green-400 text-slate-800 font-medium rounded px-5 py-2 text-center mt-6 w-1/5 hover:shadow-none"
+      >
+        Ajouter
+      </button>
+    </div>
+  </form>
+
+  <!-- Tableau des articles ajoutés -->
+  <div class="table-responsive">
+    <table
+      class="box-shadow-black2 border-3 mx-auto text-center w-full text-slate-800 mt-16"
+    >
+      <thead class="border-b-2 border-slate-800">
+        <tr class="bg-gray-50">
+          <th scope="col">Article</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Montant</th>
+        </tr>
+      </thead>
+      <tbody class="text-center divide-y divide-slate-800">
+        {% for item in panier %}
+        <tr>
+          <td>{{ item.article }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.total }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bouton pour enregistrer la dette -->
+  <form
+    action="{{ path('dette.create') }}"
+    method="post"
+    class="flex justify-center align-middle"
+  >
+    <button
+      name="saveDette"
+      type="submit"
+      class="text-slate-800 bg-green-400 font-medium rounded box-shadow px-5 py-3 text-center mt-8 mb-3 mx-auto w-1/2"
+    >
+      Enregistrer
+    </button>
+  </form>
+</div>
+
+{% endblock %}

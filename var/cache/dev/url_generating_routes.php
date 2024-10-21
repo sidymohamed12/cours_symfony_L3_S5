@@ -24,6 +24,7 @@ return [
     'client.show' => [['id'], ['id' => null, '_controller' => 'App\\Controller\\ClientController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/client/show']], [], [], []],
     'client.showDette' => [['id', 'etat'], ['id' => null, 'etat' => null, '_controller' => 'App\\Controller\\ClientController::showByEtat'], [], [['variable', '/', '[^/]++', 'etat', true], ['variable', '/', '[^/]++', 'id', true], ['text', '/client/show']], [], [], []],
     'dette.index' => [[], ['_controller' => 'App\\Controller\\DetteController::index'], [], [['text', '/dette']], [], [], []],
+    'dette.create' => [[], ['_controller' => 'App\\Controller\\DetteController::create'], [], [['text', '/dette/create']], [], [], []],
     'users.index' => [[], ['_controller' => 'App\\Controller\\UsersController::index'], [], [['text', '/users']], [], [], []],
     'user.create' => [[], ['_controller' => 'App\\Controller\\UsersController::create'], [], [['text', '/user/create']], [], [], []],
     'App\Controller\ArticleController::index' => [[], ['_controller' => 'App\\Controller\\ArticleController::index'], [], [['text', '/article']], [], [], []],
@@ -32,6 +33,7 @@ return [
     'App\Controller\ClientController::show' => [['id'], ['id' => null, '_controller' => 'App\\Controller\\ClientController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/client/show']], [], [], []],
     'App\Controller\ClientController::showByEtat' => [['id', 'etat'], ['id' => null, 'etat' => null, '_controller' => 'App\\Controller\\ClientController::showByEtat'], [], [['variable', '/', '[^/]++', 'etat', true], ['variable', '/', '[^/]++', 'id', true], ['text', '/client/show']], [], [], []],
     'App\Controller\DetteController::index' => [[], ['_controller' => 'App\\Controller\\DetteController::index'], [], [['text', '/dette']], [], [], []],
+    'App\Controller\DetteController::create' => [[], ['_controller' => 'App\\Controller\\DetteController::create'], [], [['text', '/dette/create']], [], [], []],
     'App\Controller\UsersController::index' => [[], ['_controller' => 'App\\Controller\\UsersController::index'], [], [['text', '/users']], [], [], []],
     'App\Controller\UsersController::create' => [[], ['_controller' => 'App\\Controller\\UsersController::create'], [], [['text', '/user/create']], [], [], []],
 ];

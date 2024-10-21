@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DTO\ClientDTO;
+use App\DTO\ClientSearchDTO;
 use App\Entity\Client;
 use App\Entity\Users;
 use App\Form\ClientType;
@@ -23,7 +24,8 @@ class ClientController extends AbstractController
     #[Route('/client', name: 'client.index', methods: ['GET', 'POST'])]
     public function index(Request $request, ClientRepository $clientRepository): Response
     {
-        $formSearch = $this->createForm(SearchClientType::class, null, [
+        $clientSearchDTO = new ClientSearchDTO();
+        $formSearch = $this->createForm(SearchClientType::class, $clientSearchDTO, [
             'method' => 'GET',
         ]);
         $formSearch->handleRequest($request);
@@ -36,9 +38,7 @@ class ClientController extends AbstractController
 
         if ($formSearch->isSubmitted($request) && $formSearch->isValid()) {
 
-            $telephone = $formSearch->get('telephone')->getData();
-
-            $clients = $clientRepository->paginateClient($page, $limit, $telephone);
+            $clients = $clientRepository->paginateClient($page, $limit, $clientSearchDTO->telephone);
             $page = 1;
             $totalPages = 1;
         } else {
@@ -67,7 +67,7 @@ class ClientController extends AbstractController
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
 
-            if ($request->get('toggleSwitch') === 'on' && $formUser->isValid()) {
+            if ($request->get('toggleSwitch') === 'on') {
 
                 $formUser->handleRequest($request);
                 $users->setBlocked(false);

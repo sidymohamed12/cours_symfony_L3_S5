@@ -21,15 +21,23 @@ class UsersController extends AbstractController
             'method' => 'GET',
         ]);
         $formSearch->handleRequest($request);
+        $page = $request->query->getInt('page', 1);
+        $limit = 4;
+
+        $totalUsers = $usersRepository->count([]);
+        $totalPages = ceil($totalUsers / $limit);
+
         if ($formSearch->isSubmitted($request) && $formSearch->isValid()) {
             $login = $formSearch->get('login')->getData();
-            $users = $usersRepository->paginateUser(1, 10, $login);
+            $users = $usersRepository->paginateUser(1, 1, $login);
         } else {
-            $users = $usersRepository->paginateUser(1, 10);
+            $users = $usersRepository->paginateUser($page, $limit);
         }
         return $this->render('users/index.html.twig', [
             'users' => $users,
             'formSearch' => $formSearch->createView(),
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

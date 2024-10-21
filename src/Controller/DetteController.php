@@ -2,17 +2,110 @@
 
 namespace App\Controller;
 
+use App\Entity\Detail;
+use App\Entity\Dette;
+use App\Repository\ArticleRepository;
+use App\Repository\ClientRepository;
+use App\Repository\DetteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class DetteController extends AbstractController
 {
     #[Route('/dette', name: 'dette.index')]
-    public function index(): Response
+    public function index(Request $request, DetteRepository $detteRepository): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $limit = 4;
+
+        $etat = $request->query->getInt('etat', 3);
+
+        $totalDettes = $detteRepository->countByEtat($etat);
+        $totalPages = ceil($totalDettes / $limit);
+
+        $dettes = $detteRepository->paginateDette($page, $limit, $etat);
+
         return $this->render('dette/index.html.twig', [
-            'controller_name' => 'DetteController',
+            'dettes' => $dettes,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'etat' => $etat,
+        ]);
+    }
+
+    #[Route('/dette/create', name: 'dette.create', methods: ['GET', 'POST'])]
+    public function create(Request $request, ArticleRepository $articleRepository, ClientRepository $clientRepository, SessionInterface $session, EntityManagerInterface $em): Response
+    {
+        $articles = $articleRepository->findAll();
+        $clients = $clientRepository->findAll();
+
+        $panier = $session->get('panier', []);
+
+        if ($request->isMethod('POST') && $request->request->has('addArticle')) {
+
+            // Récupérer les données de l'article sélectionné
+            $articleId = $request->request->get('article');
+            $quantity = $request->request->get('quantity');
+
+            $article = $articleRepository->find($articleId);
+
+            if ($article) {
+
+                $panier[] = [
+                    'article' => $article->getLibelle(),
+                    'quantity' => $quantity,
+                    'price' => $article->getPrix(),
+                    'total' => $article->getPrix() * $quantity,
+                    'articleDette' => $article,
+                ];
+
+                $session->set('panier', $panier);
+            }
+        }
+
+
+        if ($request->isMethod('POST') && $request->request->has('saveDette')) {
+            // dd($request);
+            $clientId = $request->get('client');
+            // dd($clientId);
+            $client = $clientRepository->find($clientId);
+
+            if ($client && !empty($panier)) {
+
+                $dette = new Dette();
+                $dette->setClient($client);
+
+                // Ajouter les détails de la dette (articles)
+                foreach ($panier as $item) {
+                    $detail = new Detail();
+                    $detail->setArticle($item['article']);
+                    $detail->setDette($dette);
+                    $detail->setQte($item['quantity']);
+                    $detail->setMontant($item['total']);
+                    $dette->addDetail($detail);
+                    $dette->addArticle($item['articleDette']);
+                }
+
+                // Sauvegarder la dette et ses détails
+                $em->persist($dette);
+                $em->flush();
+
+                // Vider la session après enregistrement
+                $session->remove('panier');
+
+                // Redirection ou message de succès
+                return $this->redirectToRoute('dette.index');
+            }
+        }
+
+        return $this->render('dette/form.html.twig', [
+            'articles' => $articles,
+            'clients' => $clients,
+            'panier' => $panier, // Passer les articles de la session à la vue
         ]);
     }
 }

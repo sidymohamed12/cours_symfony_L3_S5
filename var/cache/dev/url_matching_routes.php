@@ -18,6 +18,7 @@ return [
         '/client' => [[['_route' => 'client.index', '_controller' => 'App\\Controller\\ClientController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/client/create' => [[['_route' => 'client.create', '_controller' => 'App\\Controller\\ClientController::create'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/dette' => [[['_route' => 'dette.index', '_controller' => 'App\\Controller\\DetteController::index'], null, null, null, false, false, null]],
+        '/dette/create' => [[['_route' => 'dette.create', '_controller' => 'App\\Controller\\DetteController::create'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/users' => [[['_route' => 'users.index', '_controller' => 'App\\Controller\\UsersController::index'], null, null, null, false, false, null]],
         '/user/create' => [[['_route' => 'user.create', '_controller' => 'App\\Controller\\UsersController::create'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
     ],

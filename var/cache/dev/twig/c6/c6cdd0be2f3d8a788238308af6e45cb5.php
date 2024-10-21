@@ -278,9 +278,9 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
             // line 150
             yield "        <li>
           <a
-            href=\"";
+            href=\"?page=";
             // line 152
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.index", ["page" => ((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 152, $this->source); })()) - 1)]), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 152, $this->source); })()) - 1), "html", null, true);
             yield "\"
             class=\"flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700\"
           >
@@ -312,9 +312,9 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
             // line 174
             yield "        <li>
           <a
-            href=\"";
+            href=\"?page=";
             // line 176
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.index", ["page" => $context["i"]]), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["i"], "html", null, true);
             yield "\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight border ";
             // line 177
@@ -342,9 +342,9 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
             // line 183
             yield "        <li>
           <a
-            href=\"";
+            href=\"?page=";
             // line 185
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.index", ["page" => ((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 185, $this->source); })()) + 1)]), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((isset($context["currentPage"]) || array_key_exists("currentPage", $context) ? $context["currentPage"] : (function () { throw new RuntimeError('Variable "currentPage" does not exist.', 185, $this->source); })()) + 1), "html", null, true);
             yield "\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700\"
           >
@@ -560,7 +560,7 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
         {% if currentPage > 1 %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: currentPage - 1 }) }}\"
+            href=\"?page={{ currentPage - 1 }}\"
             class=\"flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700\"
           >
             <span class=\"sr-only\">Previous</span>
@@ -584,7 +584,7 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
         {% endif %} {% for i in 1..totalPages %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: i }) }}\"
+            href=\"?page={{ i }}\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight border {% if i == currentPage %} z-10 text-white border-blue-300 bg-gradient-to-br from-green-400 to-blue-600 hover:bg-blue-200 hover:text-blue-300 {% else %}text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700 {% endif %}\"
           >
             {{ i }}
@@ -593,7 +593,7 @@ class __TwigTemplate_95dfc77f1aba1d9e2a195bca9306982b extends Template
         {% endfor %} {% if currentPage < totalPages %}
         <li>
           <a
-            href=\"{{ path('client.index', { page: currentPage + 1 }) }}\"
+            href=\"?page={{ currentPage + 1 }}\"
             class=\"flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700\"
           >
             <span class=\"sr-only\">Next</span>
