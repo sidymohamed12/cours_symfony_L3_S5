@@ -9,13 +9,17 @@ use App\Form\UserType;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UsersController extends AbstractController
 {
@@ -47,18 +51,17 @@ class UsersController extends AbstractController
     }
 
     #[Route('/user/create', name: 'user.create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $encoder): Response
     {
         $users = new Users();
 
-        $formUser = $this->createForm(UserType::class, $users, [
-            'mailer' => $mailer,
-        ]);
+        $formUser = $this->createForm(UserType::class, $users);
 
         $formUser->handleRequest($request);
 
         if ($formUser->isSubmitted() && $formUser->isValid()) {
-
+            $hashedPassword = $encoder->hashPassword($users, $users->getPassword());
+            $users->setPassword($hashedPassword);
             $users->setBlocked(false);
             $entityManager->persist($users);
             $entityManager->flush();

@@ -4,14 +4,21 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    brochures_directory: '%kernel.project_dir%/public/uploads/img'
+
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
+        bind:
+            $brochuresDirectory: '%brochures_directory%'
     App\EventSubscriber\ClientSubscriber:
-       arguments:
+        arguments:
             $mailer: '@mailer'
+            $brochuresDirectory: '%brochures_directory%'
+            $slugger: '@slugger'
+            # tags:
+            #     - { name: 'kernel.event_subscriber' }
             # $entityManager: '@doctrine.orm.entity_manager'
             # tags:
             # - { name: 'doctrine.event_subscriber' }

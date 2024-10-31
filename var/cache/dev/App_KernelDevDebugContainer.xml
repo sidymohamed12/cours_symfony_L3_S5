@@ -93,6 +93,7 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
+    <parameter key="brochures_directory">/home/sms_12/gestion_dette/public/uploads/img</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -372,6 +373,8 @@
     <service id="App\EventSubscriber\ClientSubscriber" class="App\EventSubscriber\ClientSubscriber" autowire="true" autoconfigure="true">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="mailer.mailer"/>
+      <argument>/home/sms_12/gestion_dette/public/uploads/img</argument>
+      <argument type="service" id="slugger"/>
     </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
@@ -380,35 +383,35 @@
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\ArticleController"/>
+        <argument type="service" id=".service_locator.rVhiEDD.App\Controller\ArticleController"/>
       </call>
     </service>
     <service id="App\Controller\ClientController" class="App\Controller\ClientController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\ClientController"/>
+        <argument type="service" id=".service_locator.rVhiEDD.App\Controller\ClientController"/>
       </call>
     </service>
     <service id="App\Controller\DetteController" class="App\Controller\DetteController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\DetteController"/>
+        <argument type="service" id=".service_locator.rVhiEDD.App\Controller\DetteController"/>
       </call>
     </service>
     <service id="App\Controller\SecurityController" class="App\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\SecurityController"/>
+        <argument type="service" id=".service_locator.rVhiEDD.App\Controller\SecurityController"/>
       </call>
     </service>
     <service id="App\Controller\UsersController" class="App\Controller\UsersController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\UsersController"/>
+        <argument type="service" id=".service_locator.rVhiEDD.App\Controller\UsersController"/>
       </call>
     </service>
     <service id="App\DTO\ClientSearchDTO" class="App\DTO\ClientSearchDTO" autowire="true" autoconfigure="true"/>
@@ -427,9 +430,13 @@
     </service>
     <service id="App\Enum\StatutDette" class="App\Enum\StatutDette" autowire="true" autoconfigure="true">
       <tag name="container.error" message="The autoloader expected class &quot;App\Enum\StatutDette&quot; to be defined in file &quot;/home/sms_12/gestion_dette/vendor/composer/../../src/Enum/StatutDette.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
+      <tag name="container.error" message="Invalid service &quot;App\Enum\StatutDette&quot;: the autoloader expected class &quot;App\Enum\StatutDette&quot; to be defined in file &quot;/home/sms_12/gestion_dette/vendor/composer/../../src/Enum/StatutDette.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
     </service>
     <service id="App\Form\ClientType" class="App\Form\ClientType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+      <argument type="service" id="mailer.mailer"/>
+      <argument>/home/sms_12/gestion_dette/public/uploads/img</argument>
+      <argument type="service" id="slugger"/>
     </service>
     <service id="App\Form\DetteType" class="App\Form\DetteType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -442,6 +449,9 @@
     </service>
     <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+      <argument type="service" id="mailer.mailer"/>
+      <argument>/home/sms_12/gestion_dette/public/uploads/img</argument>
+      <argument type="service" id="slugger"/>
     </service>
     <service id="App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -493,7 +503,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.VCa7qtv"/>
+      <argument type="service" id=".service_locator.ynXIFHi"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3572,7 +3582,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.VCa7qtv"/>
+      <argument type="service" id=".service_locator.ynXIFHi"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3672,7 +3682,7 @@
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <tag name="container.service_subscriber" id="routing.loader"/>
-      <argument type="service" id=".service_locator.zAVTS8N.router.default"/>
+      <argument type="service" id=".service_locator.SmDefwA.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
         <argument key="cache_dir">/home/sms_12/gestion_dette/var/cache/dev</argument>
@@ -8282,17 +8292,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator..XbHHm9" method="withContext"/>
     </service>
-    <service id=".service_locator.P.blNFL" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.mdOU2.O" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="encoder" type="service_closure" id="security.user_password_hasher"/>
       </argument>
     </service>
-    <service id=".service_locator.P.blNFL.App\Controller\ClientController::create()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.mdOU2.O.App\Controller\ClientController::create()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClientController::create()"/>
       <argument>App\Controller\ClientController::create()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.P.blNFL" method="withContext"/>
+      <factory service=".service_locator.mdOU2.O" method="withContext"/>
     </service>
     <service id=".service_locator.bSaFovV" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8363,20 +8374,13 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.OgKtQNk" method="withContext"/>
     </service>
-    <service id=".service_locator.Iodm6uY" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="mailer" type="service_closure" id="mailer.mailer"/>
-      </argument>
-    </service>
-    <service id=".service_locator.Iodm6uY.App\Controller\UsersController::create()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.mdOU2.O.App\Controller\UsersController::create()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\UsersController::create()"/>
       <argument>App\Controller\UsersController::create()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Iodm6uY" method="withContext"/>
+      <factory service=".service_locator.mdOU2.O" method="withContext"/>
     </service>
-    <service id=".service_locator.VCa7qtv" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ynXIFHi" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -8385,26 +8389,26 @@
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Controller\ArticleController::index" type="service_closure" id=".service_locator.IqSceiR.App\Controller\ArticleController::index()"/>
         <argument key="App\Controller\ClientController::index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
-        <argument key="App\Controller\ClientController::create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
+        <argument key="App\Controller\ClientController::create" type="service_closure" id=".service_locator.mdOU2.O.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\ClientController::show" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::show()"/>
         <argument key="App\Controller\ClientController::showByEtat" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::showByEtat()"/>
         <argument key="App\Controller\DetteController::index" type="service_closure" id=".service_locator.AjxBq8..App\Controller\DetteController::index()"/>
         <argument key="App\Controller\DetteController::create" type="service_closure" id=".service_locator.xlXqlQY.App\Controller\DetteController::create()"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\UsersController::index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
-        <argument key="App\Controller\UsersController::create" type="service_closure" id=".service_locator.Iodm6uY.App\Controller\UsersController::create()"/>
+        <argument key="App\Controller\UsersController::create" type="service_closure" id=".service_locator.mdOU2.O.App\Controller\UsersController::create()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Controller\ArticleController:index" type="service_closure" id=".service_locator.IqSceiR.App\Controller\ArticleController::index()"/>
         <argument key="App\Controller\ClientController:index" type="service_closure" id=".service_locator..XbHHm9.App\Controller\ClientController::index()"/>
-        <argument key="App\Controller\ClientController:create" type="service_closure" id=".service_locator.P.blNFL.App\Controller\ClientController::create()"/>
+        <argument key="App\Controller\ClientController:create" type="service_closure" id=".service_locator.mdOU2.O.App\Controller\ClientController::create()"/>
         <argument key="App\Controller\ClientController:show" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::show()"/>
         <argument key="App\Controller\ClientController:showByEtat" type="service_closure" id=".service_locator.bSaFovV.App\Controller\ClientController::showByEtat()"/>
         <argument key="App\Controller\DetteController:index" type="service_closure" id=".service_locator.AjxBq8..App\Controller\DetteController::index()"/>
         <argument key="App\Controller\DetteController:create" type="service_closure" id=".service_locator.xlXqlQY.App\Controller\DetteController::create()"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\UsersController:index" type="service_closure" id=".service_locator.OgKtQNk.App\Controller\UsersController::index()"/>
-        <argument key="App\Controller\UsersController:create" type="service_closure" id=".service_locator.Iodm6uY.App\Controller\UsersController::create()"/>
+        <argument key="App\Controller\UsersController:create" type="service_closure" id=".service_locator.mdOU2.O.App\Controller\UsersController::create()"/>
       </argument>
     </service>
     <service id=".service_locator.ea.H0ae" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8940,7 +8944,7 @@
         <argument key="translation.loader.json" type="service_closure" id="translation.loader.json"/>
       </argument>
     </service>
-    <service id=".service_locator.QaaoWjx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="router" type="service_closure" id="router.default" on-invalid="ignore"/>
@@ -8956,35 +8960,35 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\ArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD.App\Controller\ArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ArticleController"/>
       <argument>App\Controller\ArticleController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
+      <factory service=".service_locator.rVhiEDD" method="withContext"/>
     </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\ClientController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD.App\Controller\ClientController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClientController"/>
       <argument>App\Controller\ClientController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
+      <factory service=".service_locator.rVhiEDD" method="withContext"/>
     </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\DetteController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD.App\Controller\DetteController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\DetteController"/>
       <argument>App\Controller\DetteController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
+      <factory service=".service_locator.rVhiEDD" method="withContext"/>
     </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
       <argument>App\Controller\SecurityController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
+      <factory service=".service_locator.rVhiEDD" method="withContext"/>
     </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\UsersController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rVhiEDD.App\Controller\UsersController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\UsersController"/>
       <argument>App\Controller\UsersController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
+      <factory service=".service_locator.rVhiEDD" method="withContext"/>
     </service>
     <service id=".service_locator.DMfgFyO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8998,17 +9002,17 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.DMfgFyO" method="withContext"/>
     </service>
-    <service id=".service_locator.zAVTS8N" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.SmDefwA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="routing.loader" type="service_closure" id="routing.loader"/>
       </argument>
     </service>
-    <service id=".service_locator.zAVTS8N.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.SmDefwA.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="router.default"/>
       <argument>router.default</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.zAVTS8N" method="withContext"/>
+      <factory service=".service_locator.SmDefwA" method="withContext"/>
     </service>
     <service id=".service_locator.YAcX0.U" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -10633,7 +10637,7 @@
     <service id="Symfony\UX\LiveComponent\ComponentValidatorInterface" alias="Symfony\UX\LiveComponent\ComponentValidator"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.VCa7qtv"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.ynXIFHi"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10658,6 +10662,7 @@
     <service id=".service_locator.kVuTj7R" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.q6rKGBk" alias=".1_ServiceLocator~_.xHl96"/>
     <service id=".service_locator.hUPzsWO" alias=".service_locator.ea.H0ae"/>
+    <service id=".service_locator.AaSUgmT" alias=".service_locator.rVhiEDD"/>
     <service id="validator" alias="debug.validator"/>
     <service id="http_client" alias=".debug.http_client"/>
     <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
@@ -10679,13 +10684,12 @@
     <service id=".service_locator.diNoEIK" alias=".service_locator.4wc4Ag1"/>
     <service id=".service_locator.X_OvSFQ" alias=".service_locator.IqSceiR"/>
     <service id=".service_locator.gJzZ9zV" alias=".service_locator..XbHHm9"/>
-    <service id=".service_locator.4KsIGyf" alias=".service_locator.P.blNFL"/>
+    <service id=".service_locator.XU71NsI" alias=".service_locator.mdOU2.O"/>
     <service id=".service_locator.GUAfjEv" alias=".service_locator.bSaFovV"/>
     <service id=".service_locator.MvptH6B" alias=".service_locator.AjxBq8."/>
     <service id=".service_locator.TZDmtOG" alias=".service_locator.xlXqlQY"/>
     <service id=".service_locator...2Ndi3" alias=".service_locator.mXDaS5b"/>
     <service id=".service_locator.IZhOe_k" alias=".service_locator.OgKtQNk"/>
-    <service id=".service_locator.uTIxT80" alias=".service_locator.Iodm6uY"/>
-    <service id=".service_locator.b491maD" alias=".service_locator.QaaoWjx"/>
+    <service id=".service_locator.jMQOhjA" alias=".service_locator.rVhiEDD"/>
   </services>
 </container>

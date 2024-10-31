@@ -22,6 +22,7 @@ class Users extends \App\Entity\Users implements \Doctrine\ORM\Proxy\InternalPro
     
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".parent::class."\0".'brochureFilename' => [parent::class, 'brochureFilename', null],
         "\0".parent::class."\0".'client' => [parent::class, 'client', null],
         "\0".parent::class."\0".'createdAt' => [parent::class, 'createdAt', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
@@ -32,6 +33,7 @@ class Users extends \App\Entity\Users implements \Doctrine\ORM\Proxy\InternalPro
         "\0".parent::class."\0".'prenom' => [parent::class, 'prenom', null],
         "\0".parent::class."\0".'roles' => [parent::class, 'roles', null],
         "\0".parent::class."\0".'updatedAt' => [parent::class, 'updatedAt', null],
+        'brochureFilename' => [parent::class, 'brochureFilename', null],
         'client' => [parent::class, 'client', null],
         'createdAt' => [parent::class, 'createdAt', null],
         'id' => [parent::class, 'id', null],

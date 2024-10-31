@@ -13,14 +13,14 @@ use App\Repository\ClientRepository;
 use App\Repository\DetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-use function PHPUnit\Framework\isNull;
 
 class ClientController extends AbstractController
 {
@@ -58,47 +58,34 @@ class ClientController extends AbstractController
     }
 
     #[Route('/client/create', name: 'client.create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $encoder): Response
     {
+        // dump($mailer);
         $client = new Client();
-        $users = new Users();
-
         $formClient = $this->createForm(ClientType::class, $client);
-        $formUser = $this->createForm(UserType::class, $users, [
-            'mailer' => $mailer,
-        ]);
 
         $formClient->handleRequest($request);
-
+        // dump($client->getUsers());            
+        // dump($request->request->get('toggleSwitch'));
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
-
             if ($request->get('toggleSwitch') === 'on') {
-
-                $formUser->handleRequest($request);
-
-                if (!$formUser->isValid()) {
-                    return $this->render('client/form.html.twig', [
-                        'formClient' => $formClient->createView(),
-                        'formUser' => $formUser->createView(),
-                    ]);
-                }
-
-                $users->setBlocked(false);
-                $entityManager->persist($users);
-                $client->setUsers($users);
+                $users = $client->getUsers();
+                $hashedPassword = $encoder->hashPassword($users, $users->getPassword());
+                $users->setPassword($hashedPassword);
+            } else {
+                $client->setUsers(null);
             }
 
             $entityManager->persist($client);
             $entityManager->flush();
-
             return $this->redirectToRoute('client.index');
         }
+
 
         // Rendu du template avec les formulaires
         return $this->render('client/form.html.twig', [
             'formClient' => $formClient->createView(),
-            'formUser' => $formUser->createView(),
         ]);
     }
 
