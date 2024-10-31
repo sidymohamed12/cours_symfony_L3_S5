@@ -13,14 +13,18 @@ use App\Repository\ClientRepository;
 use App\Repository\DetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 use function PHPUnit\Framework\isNull;
 
 class ClientController extends AbstractController
 {
+
     #[Route('/client', name: 'client.index', methods: ['GET', 'POST'])]
     public function index(Request $request, ClientRepository $clientRepository): Response
     {
@@ -54,13 +58,15 @@ class ClientController extends AbstractController
     }
 
     #[Route('/client/create', name: 'client.create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $client = new Client();
         $users = new Users();
 
         $formClient = $this->createForm(ClientType::class, $client);
-        $formUser = $this->createForm(UserType::class, $users);
+        $formUser = $this->createForm(UserType::class, $users, [
+            'mailer' => $mailer,
+        ]);
 
         $formClient->handleRequest($request);
 
@@ -70,8 +76,15 @@ class ClientController extends AbstractController
             if ($request->get('toggleSwitch') === 'on') {
 
                 $formUser->handleRequest($request);
-                $users->setBlocked(false);
 
+                if (!$formUser->isValid()) {
+                    return $this->render('client/form.html.twig', [
+                        'formClient' => $formClient->createView(),
+                        'formUser' => $formUser->createView(),
+                    ]);
+                }
+
+                $users->setBlocked(false);
                 $entityManager->persist($users);
                 $client->setUsers($users);
             }

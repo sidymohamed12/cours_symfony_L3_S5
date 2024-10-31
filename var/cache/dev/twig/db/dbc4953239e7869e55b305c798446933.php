@@ -37,6 +37,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
             'body' => [$this, 'block_body'],
             'main' => [$this, 'block_main'],
             'javascripts' => [$this, 'block_javascripts'],
+            'importmap' => [$this, 'block_importmap'],
         ];
     }
 
@@ -62,29 +63,29 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         ";
         // line 7
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 10
+        // line 11
         yield "
     </head>
     <body class=\"bg-gray-400\">
         ";
-        // line 13
+        // line 14
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 101
+        // line 102
         yield "
         <main>
 
             ";
-        // line 104
+        // line 105
         yield from $this->unwrap()->yieldBlock('main', $context, $blocks);
-        // line 106
+        // line 107
         yield "
         </main>
 
 
         ";
-        // line 110
+        // line 111
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 114
+        // line 117
         yield "        
     </body>
 </html>
@@ -136,6 +137,10 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
 
         // line 8
         yield "            ";
+        yield $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("app");
+        yield "
+            ";
+        // line 9
         yield $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("styles");
         yield "
         ";
@@ -148,7 +153,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         yield from [];
     }
 
-    // line 13
+    // line 14
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -161,11 +166,11 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 14
+        // line 15
         yield "            <header>
                 <nav class=\"bg-gradient-to-br from-green-400 to-blue-600 border-gray-200 px-4 lg:px-6 py-2.5 \">
                 ";
-        // line 17
+        // line 18
         yield "                <div class=\"max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4\">
                     <a href=\"\" class=\"flex items-center space-x-3 rtl:space-x-reverse\">
                         <img src=\"https://flowbite.com/docs/images/logo.svg\" class=\"h-8\" alt=\"Flowbite Logo\" />
@@ -202,7 +207,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
                         <ul class=\"flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white  md:dark:bg-gray-900 \">
                             <li>
                     <a href=\"";
-        // line 52
+        // line 53
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("client.index");
         yield "\" class=\"flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group\">          
                     <svg class=\"flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 20 20\">
@@ -214,7 +219,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
                 </li>
                 <li>
                     <a href=\"";
-        // line 61
+        // line 62
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("article.index");
         yield "\" class=\"flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group\">
                     <svg class=\"flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 18 18\">
@@ -225,7 +230,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
                 </li>
                 <li>
                     <a href=\"";
-        // line 69
+        // line 70
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dette.index");
         yield "\" class=\"flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group\">
                     <svg class=\"flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 18 20\">
@@ -245,7 +250,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
                 </li>
                 <li>
                     <a href=\"";
-        // line 86
+        // line 87
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users.index");
         yield "\" class=\"flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group\">
                     <svg class=\"flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 20 18\">
@@ -271,7 +276,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         yield from [];
     }
 
-    // line 104
+    // line 105
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -284,7 +289,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 105
+        // line 106
         yield "            ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -295,7 +300,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         yield from [];
     }
 
-    // line 110
+    // line 111
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -308,12 +313,42 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 111
+        // line 112
+        yield "            ";
+        yield $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
+        yield "
+            ";
+        // line 113
+        yield from $this->unwrap()->yieldBlock('importmap', $context, $blocks);
+        // line 114
         yield "        <script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("app.js"), "html", null, true);
         yield "\"></script>
         <script src=\"https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js\"></script>
         ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 113
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_importmap(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "importmap"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "importmap"));
+
+        yield $this->env->getRuntime('Symfony\Bridge\Twig\Extension\ImportMapRuntime')->importmap("app");
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -336,7 +371,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  312 => 111,  299 => 110,  288 => 105,  275 => 104,  249 => 86,  229 => 69,  218 => 61,  206 => 52,  169 => 17,  165 => 14,  152 => 13,  138 => 8,  125 => 7,  102 => 5,  88 => 114,  86 => 110,  80 => 106,  78 => 104,  73 => 101,  71 => 13,  66 => 10,  64 => 7,  59 => 5,  53 => 1,);
+        return array (  339 => 113,  324 => 114,  322 => 113,  317 => 112,  304 => 111,  293 => 106,  280 => 105,  254 => 87,  234 => 70,  223 => 62,  211 => 53,  174 => 18,  170 => 15,  157 => 14,  144 => 9,  139 => 8,  126 => 7,  103 => 5,  89 => 117,  87 => 111,  81 => 107,  79 => 105,  74 => 102,  72 => 14,  67 => 11,  65 => 7,  60 => 5,  54 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -348,6 +383,7 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
             {{ encore_entry_link_tags('styles') }}
         {% endblock %}
 
@@ -451,6 +487,8 @@ class __TwigTemplate_59a6d66b559e256c4534dbc3884d5790 extends Template
 
 
         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
         <script src=\"{{asset('app.js')}}\"></script>
         <script src=\"https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js\"></script>
         {% endblock %}

@@ -44,7 +44,7 @@ class Dette
     /**
      * @var Collection<int, Detail>
      */
-    #[ORM\OneToMany(targetEntity: Detail::class, mappedBy: 'dette')]
+    #[ORM\OneToMany(targetEntity: Detail::class, mappedBy: 'dette', cascade: ['persist'])]
     private Collection $details;
 
 

@@ -66,7 +66,6 @@
         Ajouter
       </button>
     </div>
-  </form>
 
   <!-- Tableau des articles ajoutés -->
   <div class="table-responsive">
@@ -94,10 +93,7 @@
     </table>
   </div>
 
-  <!-- Bouton pour enregistrer la dette -->
-  <form
-    action="{{ path('dette.create') }}"
-    method="post"
+  <div
     class="flex justify-center align-middle"
   >
     <button
@@ -107,7 +103,9 @@
     >
       Enregistrer
     </button>
-  </form>
 </div>
+</div>
+  </form>
+
 
 {% endblock %}

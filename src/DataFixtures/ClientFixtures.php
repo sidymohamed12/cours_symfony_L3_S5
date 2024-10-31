@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Client;
 use App\Entity\Dette;
 use App\Entity\Users;
+use App\Enum\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -31,7 +32,7 @@ class ClientFixtures extends Fixture
                 $user->setNom("nom" . $i);
                 $user->setPrenom("Prenom" . $i);
                 $user->setLogin("login" . $i);
-                $plaintextPassword = "password";
+                $plaintextPassword = "password" . $i;
 
                 // hash the password (based on the security.yaml config for the $user class)
                 $hashedPassword = $this->encoder->hashPassword(
@@ -39,6 +40,11 @@ class ClientFixtures extends Fixture
                     $plaintextPassword
                 );
                 $user->setPassword($hashedPassword);
+
+                $role = ($i % 4 == 0) ? ["ADMIN"] : ["BOUTIQUIER"];
+
+                $user->setRoles($role);
+
                 $client->setUsers($user);
 
                 // creation dette

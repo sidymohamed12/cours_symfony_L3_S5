@@ -13,7 +13,7 @@ return [[
         'app' => [
             'js' => [
                 '/build/runtime.js',
-                '/build/vendors-node_modules_core-js_modules_es_regexp_test_js-node_modules_core-js_modules_es_string-f20c1b.js',
+                '/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_re-e303a5.js',
                 '/build/app.js',
             ],
         ],

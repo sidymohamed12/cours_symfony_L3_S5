@@ -1,3 +1,4 @@
+import "./bootstrap.js";
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -22,6 +23,7 @@ formUser.style.display = "none";
 toggleSwitch.addEventListener("change", function () {
   if (this.checked) {
     formUser.style.display = "block";
+    console.log("oonn", this.checked);
   } else {
     formUser.style.display = "none";
   }
@@ -100,7 +102,7 @@ function checkMail(input) {
   }
 }
 
-form.addEventListener("submit", function (e) {
-  checkMail(login);
-  checkPassword(password);
-});
+// form.addEventListener("submit", function (e) {
+//   checkMail(login);
+//   checkPassword(password);
+// });

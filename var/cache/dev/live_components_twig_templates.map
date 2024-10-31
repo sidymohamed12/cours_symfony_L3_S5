@@ -16,6 +16,7 @@ return [[
     '8f866b6e2b0135e3e74f1f3288e30797' => 'users/form.html.twig',
     '81d96d7bd8996577734068358d981e01' => 'users/index.html.twig',
     '7597594eb33f3e80728624a022b5ba53' => 'article/index.html.twig',
+    '1a41e66111419918bbcc0acb506c3007' => 'security/login.html.twig',
     'f6abca84652fc589f735912b92d13ba8' => 'base.html.twig',
     '0fe1724c797470c86fec7ab41ab73676' => 'dette/form.html.twig',
     '367ec1151fadd73be67499a438fe1321' => 'dette/index.html.twig',

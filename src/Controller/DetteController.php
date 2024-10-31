@@ -47,6 +47,8 @@ class DetteController extends AbstractController
 
         if ($request->isMethod('POST') && $request->request->has('addArticle')) {
 
+            // dd($request);
+
             // Récupérer les données de l'article sélectionné
             $articleId = $request->request->get('article');
             $quantity = $request->request->get('quantity');
@@ -78,26 +80,25 @@ class DetteController extends AbstractController
 
                 $dette = new Dette();
                 $dette->setClient($client);
-
-                // Ajouter les détails de la dette (articles)
+                $bigTotal = 0;
                 foreach ($panier as $item) {
                     $detail = new Detail();
-                    $detail->setArticle($item['article']);
+                    $articleDet = $item['articleDette'];
+                    $detail->setArticle($articleDet);
                     $detail->setDette($dette);
                     $detail->setQte($item['quantity']);
                     $detail->setMontant($item['total']);
+                    $em->persist($detail);
                     $dette->addDetail($detail);
-                    $dette->addArticle($item['articleDette']);
+                    $dette->addArticle($articleDet);
+                    $bigTotal += $item['total'];
                 }
-
-                // Sauvegarder la dette et ses détails
+                $dette->setMontant($bigTotal);
                 $em->persist($dette);
                 $em->flush();
 
-                // Vider la session après enregistrement
                 $session->remove('panier');
 
-                // Redirection ou message de succès
                 return $this->redirectToRoute('dette.index');
             }
         }
@@ -105,7 +106,7 @@ class DetteController extends AbstractController
         return $this->render('dette/form.html.twig', [
             'articles' => $articles,
             'clients' => $clients,
-            'panier' => $panier, // Passer les articles de la session à la vue
+            'panier' => $panier,
         ]);
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[UniqueEntity('telephone', message: 'le téléphone doit être unique')]
-#[UniqueEntity('surname', message: 'le surname doit être unique')]
+#[UniqueEntity('surnom', message: 'le surname doit être unique')]
 class Client
 {
     #[ORM\Id]

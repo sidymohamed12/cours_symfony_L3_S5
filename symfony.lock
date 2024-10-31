@@ -4,8 +4,8 @@
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "2.12",
-            "ref": "7266981c201efbbe02ae53c87f8bb378e3f825ae"
+            "version": "2.13",
+            "ref": "8d96c0b51591ffc26794d865ba3ee7d193438a83"
         },
         "files": [
             "config/packages/doctrine.yaml",
@@ -221,7 +221,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.20",
+        "version": "2.21",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -261,7 +261,7 @@
         ]
     },
     "symfony/ux-live-component": {
-        "version": "2.20",
+        "version": "2.21",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -273,7 +273,7 @@
         ]
     },
     "symfony/ux-twig-component": {
-        "version": "2.20",
+        "version": "2.21",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

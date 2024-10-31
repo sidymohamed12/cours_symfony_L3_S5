@@ -30,6 +30,7 @@ class Users extends \App\Entity\Users implements \Doctrine\ORM\Proxy\InternalPro
         "\0".parent::class."\0".'nom' => [parent::class, 'nom', null],
         "\0".parent::class."\0".'password' => [parent::class, 'password', null],
         "\0".parent::class."\0".'prenom' => [parent::class, 'prenom', null],
+        "\0".parent::class."\0".'roles' => [parent::class, 'roles', null],
         "\0".parent::class."\0".'updatedAt' => [parent::class, 'updatedAt', null],
         'client' => [parent::class, 'client', null],
         'createdAt' => [parent::class, 'createdAt', null],
@@ -39,6 +40,7 @@ class Users extends \App\Entity\Users implements \Doctrine\ORM\Proxy\InternalPro
         'nom' => [parent::class, 'nom', null],
         'password' => [parent::class, 'password', null],
         'prenom' => [parent::class, 'prenom', null],
+        'roles' => [parent::class, 'roles', null],
         'updatedAt' => [parent::class, 'updatedAt', null],
     ];
 

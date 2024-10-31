@@ -170,7 +170,6 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
         Ajouter
       </button>
     </div>
-  </form>
 
   <!-- Tableau des articles ajoutés -->
   <div class=\"table-responsive\">
@@ -187,27 +186,27 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
       </thead>
       <tbody class=\"text-center divide-y divide-slate-800\">
         ";
-        // line 85
+        // line 84
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["panier"]) || array_key_exists("panier", $context) ? $context["panier"] : (function () { throw new RuntimeError('Variable "panier" does not exist.', 85, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["panier"]) || array_key_exists("panier", $context) ? $context["panier"] : (function () { throw new RuntimeError('Variable "panier" does not exist.', 84, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
-            // line 86
+            // line 85
             yield "        <tr>
           <td>";
+            // line 86
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "article", [], "any", false, false, false, 86), "html", null, true);
+            yield "</td>
+          <td>";
             // line 87
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "article", [], "any", false, false, false, 87), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantity", [], "any", false, false, false, 87), "html", null, true);
             yield "</td>
           <td>";
             // line 88
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantity", [], "any", false, false, false, 88), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "price", [], "any", false, false, false, 88), "html", null, true);
             yield "</td>
           <td>";
             // line 89
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "price", [], "any", false, false, false, 89), "html", null, true);
-            yield "</td>
-          <td>";
-            // line 90
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "total", [], "any", false, false, false, 90), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "total", [], "any", false, false, false, 89), "html", null, true);
             yield "</td>
         </tr>
         ";
@@ -215,18 +214,12 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['item'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 93
+        // line 92
         yield "      </tbody>
     </table>
   </div>
 
-  <!-- Bouton pour enregistrer la dette -->
-  <form
-    action=\"";
-        // line 99
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dette.create");
-        yield "\"
-    method=\"post\"
+  <div
     class=\"flex justify-center align-middle\"
   >
     <button
@@ -236,8 +229,10 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
     >
       Enregistrer
     </button>
-  </form>
 </div>
+</div>
+  </form>
+
 
 ";
         
@@ -270,7 +265,7 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  227 => 99,  219 => 93,  210 => 90,  206 => 89,  202 => 88,  198 => 87,  195 => 86,  191 => 85,  148 => 44,  137 => 42,  133 => 41,  114 => 24,  103 => 22,  99 => 21,  85 => 10,  75 => 2,  40 => 1,);
+        return array (  218 => 92,  209 => 89,  205 => 88,  201 => 87,  197 => 86,  194 => 85,  190 => 84,  148 => 44,  137 => 42,  133 => 41,  114 => 24,  103 => 22,  99 => 21,  85 => 10,  75 => 2,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -343,7 +338,6 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
         Ajouter
       </button>
     </div>
-  </form>
 
   <!-- Tableau des articles ajoutés -->
   <div class=\"table-responsive\">
@@ -371,10 +365,7 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
     </table>
   </div>
 
-  <!-- Bouton pour enregistrer la dette -->
-  <form
-    action=\"{{ path('dette.create') }}\"
-    method=\"post\"
+  <div
     class=\"flex justify-center align-middle\"
   >
     <button
@@ -384,8 +375,10 @@ class __TwigTemplate_28cd9d83eeba6c8c7c8af0d5de4deb47 extends Template
     >
       Enregistrer
     </button>
-  </form>
 </div>
+</div>
+  </form>
+
 
 {% endblock %}
 ", "dette/form.html.twig", "/home/sms_12/gestion_dette/templates/dette/form.html.twig");
